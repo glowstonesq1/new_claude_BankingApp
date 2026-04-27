@@ -22,15 +22,46 @@ function CreateKidModal({ onClose, onCreated }) {
 
     setLoading(true)
     try {
-      const { data, error } = await supabase.rpc('create_kid_account', {
-        p_username: username.trim().toLowerCase(),
-        p_display_name: displayName.trim(),
-        p_password: password,
+      const uname = username.trim().toLowerCase()
+      const dname = displayName.trim()
+      const email = `${uname}@kidbank.app`
+
+      // Check username not already taken
+      const { data: existing } = await supabase
+        .from('users').select('id').eq('username', uname).maybeSingle()
+      if (existing) { toast.error('Username already taken'); setLoading(false); return }
+
+      // Save admin session — signUp may replace it if email confirm is disabled
+      const { data: { session: adminSession } } = await supabase.auth.getSession()
+
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { username: uname, display_name: dname, role: 'kid' } },
       })
 
-      if (error) throw error
+      // Always restore admin session immediately
+      if (adminSession) {
+        await supabase.auth.setSession({
+          access_token: adminSession.access_token,
+          refresh_token: adminSession.refresh_token,
+        })
+      }
 
-      toast.success(`Account created for ${displayName}! 🎉`)
+      if (signUpError) throw signUpError
+      if (!signUpData?.user) throw new Error('User creation failed')
+      // Empty identities means email already registered
+      if (signUpData.user.identities?.length === 0) throw new Error('Email already in use')
+
+      const uid = signUpData.user.id
+
+      // handle_new_user trigger auto-creates rows; ensure correct values
+      await supabase.from('users').upsert({
+        id: uid, username: uname, display_name: dname, role: 'kid', is_frozen: false,
+      }, { onConflict: 'id' })
+      await supabase.from('accounts').upsert({ user_id: uid, balance: 0 }, { onConflict: 'user_id' })
+
+      toast.success(`Account created for ${dname}! 🎉`)
       onCreated()
       onClose()
     } catch (err) {
