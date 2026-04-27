@@ -22,49 +22,13 @@ function CreateKidModal({ onClose, onCreated }) {
 
     setLoading(true)
     try {
-      const email = `${username.trim().toLowerCase()}@kidbank.app`
+      const { data, error } = await supabase.rpc('create_kid_account', {
+        p_username: username.trim().toLowerCase(),
+        p_display_name: displayName.trim(),
+        p_password: password,
+      })
 
-      // Create auth user
-      const { data: authData, error: authError } = await supabase.auth.admin
-        ? supabase.auth.admin.createUser({ email, password, email_confirm: true })
-        : { data: null, error: { message: 'Admin API not available' } }
-
-      if (authError) {
-        // Fallback: use signUp (will send email)
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { data: { display_name: displayName } },
-        })
-
-        if (signUpError) throw signUpError
-
-        if (signUpData?.user) {
-          await supabase.from('users').upsert({
-            id: signUpData.user.id,
-            username: username.trim().toLowerCase(),
-            display_name: displayName.trim(),
-            role: 'kid',
-            is_frozen: false,
-          })
-          await supabase.from('accounts').upsert({
-            user_id: signUpData.user.id,
-            balance: 0,
-          })
-        }
-      } else if (authData?.user) {
-        await supabase.from('users').insert({
-          id: authData.user.id,
-          username: username.trim().toLowerCase(),
-          display_name: displayName.trim(),
-          role: 'kid',
-          is_frozen: false,
-        })
-        await supabase.from('accounts').insert({
-          user_id: authData.user.id,
-          balance: 0,
-        })
-      }
+      if (error) throw error
 
       toast.success(`Account created for ${displayName}! 🎉`)
       onCreated()
