@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 export default function PayTab() {
   const { profile, account, refreshAccount } = useStore()
   const [scanning, setScanning] = useState(false)
+  const [scanned, setScanned] = useState(false)
   const [payTo, setPayTo] = useState('')
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
@@ -35,8 +36,10 @@ export default function PayTab() {
     setQrPayload(result)
     const label = result.length > 30 ? result.substring(0, 30) + '…' : result
     setPayTo(label)
-    setScanning(false)
     setAmount('')
+    setDescription('')
+    setScanning(false)
+    setScanned(true)
   }
 
   const handlePay = async () => {
@@ -68,6 +71,7 @@ export default function PayTab() {
       setAmount('')
       setDescription('')
       setQrPayload(null)
+      setScanned(false)
     } catch (err) {
       toast.error('Payment failed. Try again.')
     } finally {
@@ -84,7 +88,7 @@ export default function PayTab() {
           <h3 className="font-display font-800 text-gray-800 mb-4 text-center">Scan QR Code</h3>
           <QRScanner onScan={handleScan} onClose={() => setScanning(false)} />
         </div>
-      ) : qrPayload && !submitting && payTo && !amount ? (
+      ) : scanned ? (
         /* UPI-style post-scan: just enter amount */
         <div className="card space-y-4">
           <div className="text-center">
@@ -132,7 +136,7 @@ export default function PayTab() {
             className="w-full bg-gradient-to-r from-kidbank-purple to-kidbank-pink text-white font-display font-800 py-4 rounded-2xl active:scale-95 transition-all disabled:opacity-50 text-lg">
             Pay {amount ? formatINR(Number(amount)) : ''} 🚀
           </button>
-          <button onClick={() => { setQrPayload(null); setPayTo('') }}
+          <button onClick={() => { setQrPayload(null); setPayTo(''); setAmount(''); setScanned(false) }}
             className="w-full text-gray-400 font-display font-700 text-sm py-2">
             Cancel
           </button>
