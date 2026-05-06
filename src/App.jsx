@@ -11,12 +11,18 @@ function ProtectedRoute({ children, role }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="text-center">
-          <div className="text-6xl mb-4 animate-bounce">🏦</div>
-          <p className="font-display font-700 text-kidbank-purple text-xl">Loading KidBank…</p>
-        </div>
-      </div>
+<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
+  <div className="text-center">
+    <img
+      src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+      alt="KidBank Logo"
+      className="w-24 h-24 mx-auto mb-4 animate-bounce object-contain"
+    />
+    <p className="font-display font-700 text-kidbank-purple text-xl">
+      Loading KidBank…
+    </p>
+  </div>
+</div>
     )
   }
 
