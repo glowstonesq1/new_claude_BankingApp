@@ -17,7 +17,7 @@ function OnboardingCard() {
   return (
     <div className="mx-4 mb-4 bg-gradient-to-br from-kidbank-purple to-purple-400 rounded-3xl p-5 text-white">
       <div className="text-4xl mb-3">👋</div>
-      <h2 className="font-display font-900 text-xl mb-1">Welcome to BankOfMuSo!</h2>
+      <h2 className="font-display font-900 text-xl mb-1">Welcome to MuSo!</h2>
       <p className="font-display font-700 text-white/80 text-sm mb-4">
         Your financial journey starts here! Ask your admin to add some money so you can start saving, investing, and learning about money. 🚀
       </p>

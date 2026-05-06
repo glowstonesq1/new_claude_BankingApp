@@ -25,9 +25,13 @@ export default function AdminLayout() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🏦</span>
+            <img
+              src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+              alt="MuSo"
+              className="w-8 h-8 rounded-lg object-cover"
+            />
             <div>
-              <span className="font-display font-900 text-kidbank-purple text-lg">BankOfMuSo</span>
+              <span className="font-display font-900 text-kidbank-purple text-lg">MuSo</span>
               <span className="ml-2 text-xs font-display font-700 bg-purple-100 text-kidbank-purple px-2 py-0.5 rounded-full">Admin</span>
             </div>
           </div>

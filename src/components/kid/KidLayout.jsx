@@ -23,8 +23,12 @@ export default function KidLayout() {
       {/* Top bar */}
       <header className="bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">🏦</span>
-          <span className="font-display font-900 text-kidbank-purple text-lg">BankOfMuSo</span>
+          <img
+            src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+            alt="MuSo"
+            className="w-8 h-8 rounded-lg object-cover"
+          />
+          <span className="font-display font-900 text-kidbank-purple text-lg">MuSo</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="font-display font-700 text-gray-600 text-sm">

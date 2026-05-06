@@ -126,7 +126,12 @@ export default function FinancialReport() {
 
       {/* Print-only header */}
       <div className="hidden print:block p-8 pb-4 text-center border-b border-gray-200">
-        <p className="font-display font-900 text-3xl text-kidbank-purple">🏦 BankOfMuSo</p>
+        <img
+          src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+          alt="MuSo"
+          className="w-16 h-16 rounded-2xl object-cover mx-auto mb-2"
+        />
+        <p className="font-display font-900 text-3xl text-kidbank-purple">MuSo</p>
         <h1 className="font-display font-900 text-2xl text-gray-800 mt-2">Financial Journey Report</h1>
         <p className="font-display font-700 text-gray-500 mt-1">
           {displayName} · Generated {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
@@ -245,7 +250,7 @@ export default function FinancialReport() {
         {/* Print footer */}
         <div className="hidden print:block text-center pt-4 border-t border-gray-200">
           <p className="font-display text-gray-400 text-xs">
-            BankOfMuSo · Financial Literacy Platform · Printed {new Date().toLocaleString('en-IN')}
+            MuSo · Financial Literacy Platform · Printed {new Date().toLocaleString('en-IN')}
           </p>
         </div>
       </div>

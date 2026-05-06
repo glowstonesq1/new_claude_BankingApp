@@ -13,8 +13,12 @@ function ProtectedRoute({ children, role }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="text-center">
-          <div className="text-6xl mb-4 animate-bounce">🏦</div>
-          <p className="font-display font-700 text-kidbank-purple text-xl">Loading KidBank…</p>
+          <img
+            src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+            alt="MuSo"
+            className="w-20 h-20 rounded-3xl object-cover mx-auto mb-4 animate-bounce"
+          />
+          <p className="font-display font-700 text-kidbank-purple text-xl">Loading MuSo…</p>
         </div>
       </div>
     )

@@ -67,8 +67,11 @@ export default function Login() {
 
       <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
-          <div className="text-7xl mb-3 filter drop-shadow-lg">🏦</div>
-          <h1 className="font-display font-900 text-4xl text-kidbank-purple">BankOfMuSo</h1>
+          <img
+            src="https://yt3.googleusercontent.com/NViANcNr_9xYoqoGY7if6hPZYIQ8cAD7Erxy1OoLBoCWDM-fI_13Gy37HNMDFKT8gfDdMWsv4Q=s900-c-k-c0x00ffffff-no-rj"
+            alt="MuSo"
+            className="w-24 h-24 rounded-3xl object-cover mx-auto mb-3 drop-shadow-lg"
+          />
           <p className="font-display font-600 text-gray-500 mt-1">Your money, your future! 🚀</p>
         </div>
 
